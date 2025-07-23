@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bai3gsmlaij48"]
+
+[ext_resource type="ArrayMesh" uid="uid://c4vryn6nsdwar" path="res://Models/Diamond.obj" id="1"]
+[ext_resource type="Script" uid="uid://c2hh2qljydhbm" path="res://Scripts/Diamond.gd" id="2"]
+
+[sub_resource type="SphereShape3D" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v601g"]
+albedo_color = Color(0, 1, 1, 1)
+
+[node name="Diamond" type="Area3D"]
+collision_layer = 0
+script = ExtResource("2")
+color = Color(0, 1, 1, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1")
+surface_material_override/0 = SubResource("StandardMaterial3D_v601g")
+
+[connection signal="body_entered" from="." to="." method="_on_Diamond_body_entered"]

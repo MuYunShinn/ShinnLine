@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://c37j48jq3u0jp"]
+
+[ext_resource type="PackedScene" uid="uid://c1n8bx17ts38c" path="res://Scenes/MainLine.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://Scenes/BaseCam.tscn" id="3"]
+
+[sub_resource type="Animation" id="3"]
+length = 130.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/0/use_blend = true
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("MainLine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cm0pq"]
+_data = {
+&"Default": SubResource("3")
+}
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cm0pq"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_fos0i"]
+sky_material = SubResource("ProceduralSkyMaterial_cm0pq")
+
+[sub_resource type="Environment" id="Environment_3dxm6"]
+background_mode = 2
+sky = SubResource("Sky_fos0i")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MainLine" parent="." instance=ExtResource("1")]
+motion_mode = 1
+fly = true
+animation = NodePath("../AnimationPlayer")
+
+[node name="BaseCam" parent="." instance=ExtResource("3")]
+transform = Transform3D(0.707107, 0.41968, -0.569095, 0, 0.804821, 0.593517, 0.707107, -0.41968, 0.569095, 0, 0, 0)
+target = NodePath("../MainLine")
+
+[node name="Camera3D" parent="BaseCam" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.08616e-07, 0, -2.38419e-07, 1, 0, 2.57485, 10.1414)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cm0pq")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3dxm6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[editable path="BaseCam"]

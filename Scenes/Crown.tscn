@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7yycciy51i3l"]
+
+[ext_resource type="ArrayMesh" uid="uid://dmpr4wgxf28ca" path="res://Models/PerfactCrown.obj" id="1"]
+[ext_resource type="Script" uid="uid://cf702gx6voc2l" path="res://Scripts/Crown.gd" id="2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qoafd"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxShape3D" id="2"]
+
+[node name="Crown" type="Area3D"]
+collision_layer = 0
+script = ExtResource("2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, -2.18557e-07, 5, 0, -5, -2.18557e-07, 0, 0, 0)
+mesh = ExtResource("1")
+surface_material_override/0 = SubResource("StandardMaterial3D_qoafd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("2")
+
+[connection signal="body_entered" from="." to="." method="_on_Crown_body_entered"]

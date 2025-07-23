@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/RoadMaker.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/BaseFloor.tscn" type="PackedScene" id=2]
+
+[node name="RoadMaker" type="Marker3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0 )
+script = ExtResource( 1 )
+base_floor = ExtResource( 2 )

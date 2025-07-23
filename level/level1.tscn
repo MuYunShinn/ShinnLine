@@ -1,0 +1,223 @@
+[gd_scene load_steps=26 format=3 uid="uid://bg38i1uh43xna"]
+
+[ext_resource type="PackedScene" uid="uid://c1n8bx17ts38c" path="res://Scenes/MainLine.tscn" id="1_gd1gh"]
+[ext_resource type="PackedScene" uid="uid://osap8508k36g" path="res://Scenes/BaseCam.tscn" id="3_a1r6t"]
+[ext_resource type="PackedScene" uid="uid://pcsg6tvoubqp" path="res://Roads.tscn" id="4_gd1gh"]
+[ext_resource type="AudioStream" uid="uid://dyylnqvcckmpp" path="res://level/月夜 Lunar Night.mp3" id="4_pkqcj"]
+[ext_resource type="PackedScene" uid="uid://bai3gsmlaij48" path="res://Scenes/Diamond.tscn" id="5_afkyo"]
+[ext_resource type="PackedScene" uid="uid://b7yycciy51i3l" path="res://Scenes/Crown.tscn" id="6_a1r6t"]
+[ext_resource type="PackedScene" uid="uid://cklp581y76u6r" path="res://Scenes/BaseWall.tscn" id="7_pkqcj"]
+[ext_resource type="FontFile" uid="uid://cr443hqoouujq" path="res://Resources/CaviarDreams-1.ttf" id="8_hoo32"]
+[ext_resource type="PackedScene" path="res://Scenes/BaseFloor.tscn" id="10_t0khj"]
+[ext_resource type="PackedScene" uid="uid://bcx8mke3r0h07" path="res://Scenes/jump.tscn" id="10_xsfx6"]
+[ext_resource type="PackedScene" uid="uid://bw2k15r21fk7" path="res://Scenes/jinzita.tscn" id="11_xsfx6"]
+
+[sub_resource type="Animation" id="3"]
+length = 130.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.6,
+"stream": ExtResource("4_pkqcj")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainLine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(85.38),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"turn"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cm0pq"]
+_data = {
+&"Default": SubResource("3")
+}
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hoo32"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_vscsl"]
+sky_material = SubResource("ProceduralSkyMaterial_hoo32")
+
+[sub_resource type="Environment" id="Environment_t0khj"]
+background_mode = 2
+sky = SubResource("Sky_vscsl")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="TextMesh" id="TextMesh_vscsl"]
+text = "10%"
+font = ExtResource("8_hoo32")
+font_size = 20
+
+[sub_resource type="TextMesh" id="TextMesh_t0khj"]
+text = "20%"
+font = ExtResource("8_hoo32")
+font_size = 20
+
+[sub_resource type="TextMesh" id="TextMesh_xsfx6"]
+text = "30%"
+font = ExtResource("8_hoo32")
+font_size = 20
+
+[sub_resource type="TextMesh" id="TextMesh_qae1c"]
+text = "40%"
+font = ExtResource("8_hoo32")
+font_size = 20
+
+[sub_resource type="TextMesh" id="TextMesh_n6f2s"]
+text = "50%"
+font = ExtResource("8_hoo32")
+font_size = 20
+
+[sub_resource type="TextMesh" id="TextMesh_ulkxl"]
+text = "60%"
+font = ExtResource("8_hoo32")
+font_size = 20
+
+[sub_resource type="TextMesh" id="TextMesh_3f123"]
+text = "70%"
+font = ExtResource("8_hoo32")
+font_size = 20
+
+[sub_resource type="TextMesh" id="TextMesh_ejitl"]
+text = "80%"
+font = ExtResource("8_hoo32")
+font_size = 20
+
+[sub_resource type="TextMesh" id="TextMesh_kuxre"]
+text = "90%"
+font = ExtResource("8_hoo32")
+font_size = 20
+
+[node name="Level1" type="Node3D"]
+
+[node name="MainLine" parent="." instance=ExtResource("1_gd1gh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3088, 0)
+slide_on_ceiling = false
+velocity = Vector3(0, -774.839, 0)
+floor_constant_speed = true
+speed = 20.0
+color = Color(1, 0, 0, 1)
+animation = NodePath("../AnimationPlayer")
+
+[node name="BaseCam" parent="." instance=ExtResource("3_a1r6t")]
+transform = Transform3D(0.707107, 0.41968, -0.569095, 0, 0.804821, 0.593517, 0.707107, -0.41968, 0.569095, 0, 0, 0)
+target = NodePath("../MainLine")
+
+[node name="Camera3D" parent="BaseCam" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.08616e-07, 0, -2.38419e-07, 1, 0, 2.57485, 10.1414)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cm0pq")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_t0khj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Roads" parent="." instance=ExtResource("4_gd1gh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.13257, 0)
+
+[node name="Diamond" parent="." instance=ExtResource("5_afkyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0754744, 3.22127, -13.0056)
+
+[node name="Crown" parent="." instance=ExtResource("6_a1r6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 121.842, 3.03698, -142.564)
+
+[node name="BaseWall" parent="." instance=ExtResource("7_pkqcj")]
+transform = Transform3D(1104.45, -0.675003, -9.4591, 1.5831e-05, -0.0698958, 199.511, -1014.99, -0.734497, -10.2928, 293.947, 1, -333.743)
+visible = false
+
+[node name="Crown2" parent="." instance=ExtResource("6_a1r6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 562.865, 3.07304, -538.095)
+
+[node name="Crown3" parent="." instance=ExtResource("6_a1r6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 868.514, 3.07304, -842.394)
+
+[node name="10" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 0.43525, 0.000999763, 0, -19.9953, 2.17625e-05, 126.902, 2.31404, -138.769)
+mesh = SubResource("TextMesh_vscsl")
+skeleton = NodePath("../BaseWall")
+
+[node name="20" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 0.43525, 0.000999763, 0, -19.9953, 2.17625e-05, 249.069, 2.33065, -243.589)
+mesh = SubResource("TextMesh_t0khj")
+skeleton = NodePath("../BaseWall")
+
+[node name="30" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 0.43525, 0.000999763, 0, -19.9953, 2.17625e-05, 375.395, 2.33065, -364.087)
+mesh = SubResource("TextMesh_xsfx6")
+skeleton = NodePath("../BaseWall")
+
+[node name="40" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 0.389319, 0.000999811, 0, -19.9962, 1.9466e-05, 427.914, 3.10225, -413.08)
+mesh = SubResource("TextMesh_qae1c")
+skeleton = NodePath("../BaseWall")
+
+[node name="50" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 0.43525, 0.000999763, 0, -19.9953, 2.17625e-05, 517.313, 2.33065, -496.049)
+mesh = SubResource("TextMesh_n6f2s")
+skeleton = NodePath("../BaseWall")
+
+[node name="60" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 0.43525, 0.000999763, 0, -19.9953, 2.17625e-05, 574.368, 2.33065, -554.289)
+mesh = SubResource("TextMesh_ulkxl")
+skeleton = NodePath("../BaseWall")
+
+[node name="70" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 0.43525, 0.000999763, 0, -19.9953, 2.17625e-05, 643.702, 2.33065, -621.635)
+mesh = SubResource("TextMesh_3f123")
+skeleton = NodePath("../BaseWall")
+
+[node name="80" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 0.43525, 0.000999763, 0, -19.9953, 2.17625e-05, 690.47, 2.33065, -669.776)
+mesh = SubResource("TextMesh_ejitl")
+skeleton = NodePath("../BaseWall")
+
+[node name="90" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 0.43525, 0.000999763, 0, -19.9953, 2.17625e-05, 804.966, 2.33065, -771.828)
+mesh = SubResource("TextMesh_kuxre")
+skeleton = NodePath("../BaseWall")
+
+[node name="BaseWall2" parent="." instance=ExtResource("7_pkqcj")]
+transform = Transform3D(15.2547, 0, 0, 0, 3, 0, 0, 0, 3, 868.667, 4.13516, -900.986)
+
+[node name="BaseFloor" parent="." instance=ExtResource("10_t0khj")]
+transform = Transform3D(1000, 0, 0, 0, 1, 0, 0, 0, 1000, 500, 2.2, -500)
+visible = false
+
+[node name="jump" parent="." instance=ExtResource("10_xsfx6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.63268, 3.15361, -38.3817)
+
+[node name="jinzita" parent="." instance=ExtResource("11_xsfx6")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 869, 3, -879.203)
+
+[node name="BaseWall3" parent="." instance=ExtResource("7_pkqcj")]
+transform = Transform3D(1075.68, -0.695248, -9.7428, 1.54977e-05, -0.0698958, 199.511, -1045.43, -0.715364, -10.0247, 503.19, 1, -459.743)
+visible = false
+
+[editable path="BaseCam"]
